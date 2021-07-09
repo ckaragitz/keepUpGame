@@ -103,11 +103,6 @@ void gameOver() {
       highScore = counter;
     }
     
-  // reset variables
-  counter = 0;
-  speed = 1;
-  size = 120;
-  
   noLoop();
   textSize(50);
   text("GAME OVER", 300, 300);
@@ -116,11 +111,23 @@ void gameOver() {
 
 }
 
+void reset() {
+  
+  // reset variables
+  dirX = 5;
+  dirY = 5;
+  counter = 0;
+  speed = 1;
+  size = 120;
+  
+}
+
 void keyPressed() {
 
   if(key== ' ') {
     ballX = 300;
     ballY = 100;
+    reset();
     loop();
   }
   
