@@ -9,6 +9,8 @@ float speed = 1;
 int size = 120;
 
 int counter = 0;
+int highScore = 0;
+boolean firstGame = true;
 
 void setup() {
   size(600, 600);
@@ -33,18 +35,26 @@ void draw() {
   textSize(20);
   text("Score: " + counter, 75, 50);
   
+  // draw high score
+  if(firstGame == false) {
+    textSize(15);
+    text("High Score: " + highScore, 75, 75);
+  }
+  
   // draw ball and paddle
   fill(255);
   ellipse(ballX,ballY,20,20);
   rect(mouseX, 500, size, 20);
   
+  collisionLogic();
+  
+}
+
+void collisionLogic() {
+  
   // collision statements for Y and paddle
   if(ballY >= 550) {
-    noLoop();
-    textSize(50);
-    text("GAME OVER", 300, 300);
-    textSize(20);
-    text("Press SPACE to Play Again", 300, 350);
+    gameOver();
   } else if(ballY <= 0) {
     dirY = 5*speed;
     ballY += dirY;
@@ -62,7 +72,7 @@ void draw() {
   } else {
     ballY += dirY;
   }
-
+  
   // collision statements for X
   if(ballX <= 0) {
     dirX = 5*speed;
@@ -77,11 +87,23 @@ void draw() {
    
 }
 
+void gameOver() {
+  
+  firstGame = false;
+  noLoop();
+  textSize(50);
+  text("GAME OVER", 300, 300);
+  textSize(20);
+  text("Press SPACE to Play Again", 300, 350);
+
+}
+
 void keyPressed() {
 
   if(key== ' ') {
     ballX = random(20, 580);
     ballY = random(50, 350);
+    highScore = counter;
     counter = 0;
     speed = 1;
     size = 120;
