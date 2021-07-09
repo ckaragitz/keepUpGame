@@ -1,4 +1,4 @@
-// Cameron Karagitz - KeepUp (Breakout Ripoff)
+// Cameron Karagitz - KeepUp (Breakout ripoff)
 PImage water;
 
 float ballX = 300;
