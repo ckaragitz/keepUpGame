@@ -103,7 +103,11 @@ void keyPressed() {
   if(key== ' ') {
     ballX = random(20, 580);
     ballY = random(50, 350);
-    highScore = counter;
+    if(counter >= highScore) {
+      highScore = counter;
+    }
+    
+    // reset variables
     counter = 0;
     speed = 1;
     size = 120;
