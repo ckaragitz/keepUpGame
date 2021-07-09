@@ -13,12 +13,15 @@ int highScore = 0;
 boolean firstGame = true;
 
 void setup() {
+  
   size(600, 600);
   water = loadImage("water.png");
   textAlign(CENTER);
+  
 }
 
 void draw() {
+  
   // draw assets
   background(75);
   image(water, 0, 530, 600, 50);
@@ -46,11 +49,11 @@ void draw() {
   ellipse(ballX,ballY,20,20);
   rect(mouseX, 500, size, 20);
   
-  collisionLogic();
+  movement();
   
 }
 
-void collisionLogic() {
+void movement() {
   
   // collision statements for Y and paddle
   if(ballY >= 550) {
@@ -60,13 +63,7 @@ void collisionLogic() {
     ballY += dirY;
   } else if(ballY >= 500 && ballX >= mouseX && ballX <= mouseX + size) {
     counter++;
-    // speed multiplier and size decrementer
-    if(counter % 10 == 0) {
-      speed = speed + 0.2;
-      if(size >= 20) {
-        size = size - 5;
-      }
-    }
+    increaseDifficulty();
     dirY = -5*speed;
     ballY += dirY;
   } else {
@@ -87,9 +84,30 @@ void collisionLogic() {
    
 }
 
+void increaseDifficulty() {
+  
+  // speed multiplier and size decrementer
+    if(counter % 10 == 0) {
+      speed = speed + 0.2;
+      if(size >= 20) {
+        size = size - 5;
+      }
+    }
+    
+}
+
 void gameOver() {
   
   firstGame = false;
+  if(counter >= highScore) {
+      highScore = counter;
+    }
+    
+  // reset variables
+  counter = 0;
+  speed = 1;
+  size = 120;
+  
   noLoop();
   textSize(50);
   text("GAME OVER", 300, 300);
@@ -103,14 +121,6 @@ void keyPressed() {
   if(key== ' ') {
     ballX = random(20, 580);
     ballY = random(50, 350);
-    if(counter >= highScore) {
-      highScore = counter;
-    }
-    
-    // reset variables
-    counter = 0;
-    speed = 1;
-    size = 120;
     loop();
   }
   
