@@ -119,8 +119,8 @@ void gameOver() {
 void keyPressed() {
 
   if(key== ' ') {
-    ballX = random(20, 580);
-    ballY = random(50, 350);
+    ballX = 300;
+    ballY = 100;
     loop();
   }
   
