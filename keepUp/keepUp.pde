@@ -62,7 +62,7 @@ void collisionLogic() {
     counter++;
     // speed multiplier and size decrementer
     if(counter % 10 == 0) {
-      speed = speed + 0.5;
+      speed = speed + 0.2;
       if(size >= 20) {
         size = size - 5;
       }
